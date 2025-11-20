@@ -1,0 +1,542 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background-color: #e8e8e8;
+    color: #333;
+}
+
+.app-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 40px 20px;
+}
+
+/* Action Toolbar */
+.action-toolbar {
+    position: sticky;
+    top: 20px;
+    width: 100%;
+    max-width: 900px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px 20px;
+    margin-bottom: 20px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    z-index: 100;
+}
+
+.toolbar-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-right: auto;
+}
+
+/* Invoice Container */
+.invoice-container {
+    background-color: white;
+    padding: 40px;
+    max-width: 900px;
+    width: 100%;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 40px;
+}
+
+/* Inline Editable Inputs */
+.inline-input,
+.inline-textarea {
+    border: 1px solid transparent;
+    background-color: transparent;
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    padding: 4px 8px;
+    margin: -4px -8px;
+    border-radius: 4px;
+    transition: all 0.2s;
+    width: 100%;
+}
+
+.inline-input:hover,
+.inline-textarea:hover {
+    background-color: #f9f9f9;
+    border-color: #e0e0e0;
+}
+
+.inline-input:focus,
+.inline-textarea:focus {
+    outline: none;
+    background-color: #fff;
+    border-color: #4CAF50;
+    box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.1);
+}
+
+.inline-input::placeholder,
+.inline-textarea::placeholder {
+    color: #bbb;
+    font-style: italic;
+}
+
+.inline-textarea {
+    resize: none;
+    min-height: 60px;
+}
+
+select {
+    padding: 4px 8px;
+    margin: -4px -8px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    font-size: inherit;
+    font-family: inherit;
+    background-color: transparent;
+    transition: all 0.2s;
+}
+
+select:hover {
+    background-color: #f9f9f9;
+    border-color: #e0e0e0;
+}
+
+select:focus {
+    outline: none;
+    background-color: #fff;
+    border-color: #4CAF50;
+    box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.1);
+}
+
+/* Items Table - Inline Editing */
+.editable-items-section {
+    margin: 30px 0;
+}
+
+.item-row-editable {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr 40px;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 5px;
+    padding: 5px 0;
+}
+
+.item-row-editable:hover {
+    background-color: #fafafa;
+    border-radius: 4px;
+}
+
+.item-row-editable .inline-input {
+    font-size: 14px;
+}
+
+.item-row-editable .amount {
+    font-weight: 500;
+    color: #333;
+    padding: 4px 8px;
+}
+
+button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+.btn-add {
+    background-color: #4CAF50;
+    color: white;
+    margin-top: 10px;
+    width: auto;
+    padding: 8px 20px;
+}
+
+.btn-add:hover {
+    background-color: #45a049;
+}
+
+.btn-remove {
+    background-color: transparent;
+    color: #f44336;
+    padding: 5px;
+    font-size: 18px;
+    line-height: 1;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.btn-remove:hover {
+    background-color: #ffebee;
+    color: #c62828;
+}
+
+.btn-save, .btn-download-pdf, .btn-upload-logo {
+    padding: 10px 20px;
+    font-size: 14px;
+}
+
+.btn-save {
+    background-color: #2196F3;
+    color: white;
+}
+
+.btn-save:hover {
+    background-color: #1976D2;
+}
+
+.btn-download-pdf {
+    background-color: #FF9800;
+    color: white;
+}
+
+.btn-download-pdf:hover {
+    background-color: #F57C00;
+}
+
+/* Logo Upload Styles */
+.logo-upload-container {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 15px;
+}
+
+.logo-upload-placeholder {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    height: 80px;
+    border: 2px dashed #bbb;
+    border-radius: 8px;
+    background-color: #fafafa;
+    color: #888;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-bottom: 15px;
+}
+
+.logo-upload-placeholder:hover {
+    border-color: #9C27B0;
+    background-color: #f3e5f5;
+    color: #9C27B0;
+}
+
+.company-logo-editable {
+    max-width: 150px;
+    max-height: 80px;
+    object-fit: contain;
+    cursor: pointer;
+    border: 2px dashed transparent;
+    border-radius: 4px;
+    padding: 5px;
+    transition: all 0.2s;
+    display: block;
+}
+
+.company-logo-editable:hover {
+    border-color: #9C27B0;
+    background-color: #f3e5f5;
+}
+
+.btn-remove-logo-inline {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: #f44336;
+    color: white;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    padding: 0;
+    font-size: 16px;
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-remove-logo-inline:hover {
+    background-color: #c62828;
+    transform: scale(1.1);
+}
+
+.invoice-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+}
+
+.invoice-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.company-logo {
+    max-width: 150px;
+    max-height: 80px;
+    object-fit: contain;
+    margin-bottom: 15px;
+}
+
+.company-info h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #1a1a1a;
+}
+
+.company-info p, .customer-section p, .shipping-section p {
+    margin: 5px 0;
+    color: #555;
+    line-height: 1.6;
+}
+
+.company-info .address, .customer-section .address, .shipping-section .address {
+    margin-top: 10px;
+    color: #777;
+    font-size: 14px;
+}
+
+.invoice-meta {
+    text-align: right;
+}
+
+.invoice-meta div {
+    margin: 8px 0;
+    font-size: 14px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 10px;
+    justify-items: end;
+}
+
+.invoice-meta div strong {
+    justify-self: start;
+}
+
+.customer-shipping-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 20px;
+}
+
+.customer-section {
+    margin-bottom: 0;
+}
+
+.shipping-section {
+    margin-bottom: 0;
+}
+
+.customer-section h3,
+.shipping-section h3 {
+    font-size: 13px;
+    text-transform: uppercase;
+    color: #000;
+    font-weight: 700;
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+}
+
+/* Invoice Table */
+.invoice-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.invoice-table th {
+    background-color: #000;
+    padding: 10px 12px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    color: #fff;
+    border-bottom: none;
+}
+
+.invoice-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #e8e8e8;
+    color: #333;
+    font-size: 13px;
+}
+
+/* Center-align quantity and rate columns */
+.invoice-table th:nth-child(2),
+.invoice-table th:nth-child(3),
+.invoice-table td:nth-child(2),
+.invoice-table td:nth-child(3) {
+    text-align: center;
+}
+
+/* Right-align amount column */
+.invoice-table th:nth-child(4),
+.invoice-table td:nth-child(4) {
+    text-align: right;
+    padding-right: 5px;
+}
+
+.invoice-table th:last-child,
+.invoice-table td:last-child {
+    text-align: right;
+}
+
+/* Totals */
+.invoice-totals {
+    margin-left: auto;
+    width: 300px;
+    margin-bottom: 20px;
+    margin-top: 30px;
+}
+
+.total-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    font-size: 14px;
+}
+
+.total-row.total-final {
+    border-top: 2px solid #333;
+    margin-top: 8px;
+    padding-top: 12px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #1a1a1a;
+}
+
+/* Notes */
+.invoice-notes {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #e0e0e0;
+}
+
+.invoice-notes h3 {
+    font-size: 13px;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 8px;
+}
+
+.invoice-notes p {
+    color: #555;
+    line-height: 1.5;
+    font-size: 14px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .invoice-container {
+        padding: 30px 20px;
+    }
+
+    .action-toolbar {
+        flex-wrap: wrap;
+    }
+
+    .toolbar-title {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .customer-shipping-section {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .customer-section {
+        margin-bottom: 0;
+    }
+}
+
+@media print {
+    body {
+        background-color: white;
+    }
+
+    .app-container {
+        padding: 0;
+    }
+
+    .action-toolbar {
+        display: none !important;
+    }
+
+    .invoice-container {
+        box-shadow: none;
+        padding: 20px;
+        max-width: 100%;
+    }
+
+    .btn-add,
+    .btn-remove,
+    .btn-upload-logo,
+    .btn-remove-logo,
+    .btn-remove-logo-inline,
+    .logo-upload-placeholder {
+        display: none !important;
+    }
+
+    .company-logo-editable {
+        border: none !important;
+        cursor: default !important;
+    }
+
+    .company-logo-editable:hover {
+        background-color: transparent !important;
+    }
+
+    .inline-input,
+    .inline-textarea,
+    select {
+        border: none !important;
+        background: transparent !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        box-shadow: none !important;
+        -webkit-appearance: none !important;
+        appearance: none !important;
+    }
+
+    /* Hide empty inputs in print */
+    input:placeholder-shown {
+        display: none !important;
+    }
+
+    textarea:placeholder-shown {
+        display: none !important;
+    }
+}
