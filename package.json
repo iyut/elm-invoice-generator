@@ -1,0 +1,11 @@
+{
+  "name": "elm-invoice-generator",
+  "version": "1.0.0",
+  "description": "Invoice generator built with Elm",
+  "scripts": {
+    "dev": "elm make src/Main.elm --output=elm.js",
+    "build": "elm make src/Main.elm --optimize --output=dist/elm.js && cp index.html dist/index.html && cp -r assets dist/assets",
+    "clean": "rm -rf dist elm-stuff"
+  },
+  "private": true
+}
